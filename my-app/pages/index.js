@@ -7,6 +7,8 @@ function HomePage() {
     {id: "events", title: "Events"}
   ]
 
+
+
   return (
     <div>
       <h1>The Furniture Page</h1>
