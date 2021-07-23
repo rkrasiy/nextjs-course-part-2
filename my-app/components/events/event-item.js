@@ -15,22 +15,20 @@ function EventItem ( props ) {
   const exporeLink = "/events/" + id;
 
   return <li className={classes.item}>
-          <div className={classes.image}>
-                <img src={image} alt={title} />
-          </div>
-          <div className={classes.content}>
-            <h2>{title}</h2>
-            <div className={classes.date}>
-              <time>{simpleDate}</time>
+          <LinkWrapper href={exporeLink} className={classes.wrapper} >
+            <div className={classes.image}>
+              <img src={image} alt={title} />
             </div>
-            <div className={classes.address}>
-              <address>{simpleAddress}</address>
+            <div className={classes.content}>
+              <h2>{title}</h2>
+              <div className={classes.date}>
+                <time>{simpleDate}</time>
+              </div>
+              <div className={classes.address}>
+                <address>{simpleAddress}</address>
+              </div>
             </div>
-            <div className={classes["link-wrapper"]}>
-              <LinkWrapper href={exporeLink} className={classes.link} >Explore Event</LinkWrapper>
-            </div>
-            
-          </div>
+          </LinkWrapper>
         </li>
 }
 

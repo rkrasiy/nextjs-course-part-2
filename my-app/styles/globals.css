@@ -8,6 +8,7 @@
   --border-radius: 3px;
   --font-size: 16px;
   --line-height: 3px;
+  --shadow: 0px 2px 9px rgb(112 112 112 / 15%);
 
   --h1: calc(var(--font-size) * 2);
   --h1-line: calc(var(--h1) + var(--line-height));
@@ -31,6 +32,8 @@ img {
 
 body {
   font-family: 'Open Sans', 'Lato', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 a{
   text-decoration: none;
@@ -62,7 +65,12 @@ h6 {
   padding: 1em;
 }
 
-.block:not(:last-child, :only-child),
-li:not(:last-child, :only-child) {
+.block:not(:last-child, :only-child) {
   margin-bottom: 1em;
 }
+
+header{box-shadow: var(--shadow);padding: 1em;}
+header,header nav ul {display: flex; flex-direction: row;justify-content: space-between;align-items: center;}
+nav ul{list-style: none;padding: 0;margin: 0;}
+nav ul > li{margin-bottom: 0;padding: .5em 1em;}
+nav ul a{text-transform: uppercase;color: #000}

@@ -1,10 +1,10 @@
 import Link from 'next/link';
-
+import classes from "./main-header.module.css"
 
 function MainHeader () {
   return <header>
-    <div className="Logo">
-      <Link href="/">Home Page</Link>
+    <div className={classes.weblogo}>
+      <Link href="/"><a className="link-logo" title="Home Page"><img src="/logo.svg" className={classes.icon} alt="Web logo"/></a></Link>
     </div>
     <nav>
       <ul>
