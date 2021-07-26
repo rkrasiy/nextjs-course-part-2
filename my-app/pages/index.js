@@ -1,6 +1,4 @@
-import Link from "next/link";
-
-function HomePage() {
+function HomePage( props ) {
 
   return (
     <div>

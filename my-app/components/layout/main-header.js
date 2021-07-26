@@ -6,6 +6,9 @@ function MainHeader () {
   const router = useRouter()
   let pages = [
     {href: "/contact", title: "Contact", active: false},
+    {href: "/last-sales", title: "Last Sales", active: false},
+    {href: "/user-profile", title: "USER", active: false},
+    {href: "/products", title: "Products", active: false},
     {href: "/events", title: "Events", active: false},
     {href: "/furniture/kitchens", title: "Kitchens", active: false},
     {href: "/furniture/wardrobes", title: "Wardrobes", active: false}
