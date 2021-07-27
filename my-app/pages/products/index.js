@@ -8,13 +8,20 @@ function Products( props ) {
 
   return (
     <div>
-      <h1>The Home Page</h1>
+      <h1>Static Generation Page</h1>
+      <p>Generate ALL static pages on server.</p>
       <ul>
-        <p>getStaticProps function</p>
         {products.map( product => (
           <li key={product.id}><LinkWrapper href={`/products/${product.id}`}>{product.title}</LinkWrapper></li>
         ))}
       </ul>
+     <p>Link to "/products/" + product.id</p>
+    <p>Use func <strong>getStaticProps</strong></p>
+
+    <p>This func will get all posible data ID's from .json ficher.</p>
+    <p>And then generate static pages with data content.</p>
+    <p><em>It necesary for 'dynamic' page data.</em></p>
+    
     </div>
   );
 }

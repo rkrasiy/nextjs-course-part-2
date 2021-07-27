@@ -8,10 +8,23 @@ function ProductID ( props ){
   if(!loadedProduct)
    return <p>Loading...</p>
 
+  let divStyle =  {
+    padding: "1em",
+    border: "1px solid #000"
+  }
+
   return (
     <Fragment>
-      <h1>{loadedProduct.title}</h1>
-      <h2>{loadedProduct.description}</h2>
+      <h1>Static Generation Page</h1>
+      <p>Generate ALL static pages on server.</p>
+      <div style={divStyle}>
+        <h2>{loadedProduct.title}</h2>
+        <h3>{loadedProduct.description}</h3>
+      </div>
+      <p>Use func <strong>getStaticProps</strong> and <strong>getStaticPaths</strong></p>
+      <p><strong>getStaticProps</strong> - get params from url ( visit page via link)</p>
+      <p><strong>getStaticPaths</strong> - get params from url ('user' inputs ID manualy)</p>
+      <p><em>It necesary for 'dynamic' page data.</em></p>
     </Fragment>
   )
 }

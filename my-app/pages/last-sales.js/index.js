@@ -1,4 +1,3 @@
-import { urlObjectKeys } from "next/dist/next-server/lib/utils";
 import { useEffect, useState } from "react";
 import useSWR from 'swr';
 
@@ -52,9 +51,16 @@ function LastSalesPage( props ) {
     return <p>Loading...</p>
   }
 
-  return <ul>
-    {sales.map(sale => <li key={sale.id}>{sale.username} - {sale.volume}€</li>)}
-  </ul>
+  return <div>
+          <ul>
+          {sales.map(sale => <li key={sale.id}>{sale.username} - {sale.volume}€</li>)}
+        </ul>
+        <p>Use func <strong>getServerSideProps</strong> for server side and  useSWR (HOOK) with useEffect (HOOK)</p>
+        <p>Best practics: use Server Side Render with Client Side Fetch</p>
+        <p>It's will remove spiner loading, because server send pre-rendered </p>
+        <p>page width 'old' data and Client fetch for new data.</p>
+        <p><strong>Get DATA from 'firebase'</strong></p>
+    </div>
 
 }
 
