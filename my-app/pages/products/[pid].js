@@ -55,7 +55,9 @@ export async function getStaticProps( context ){
   }
 }
 
-// fallback: 'blocking' |  fallback: true |  fallback: false
+// fallback: 'blocking' - if each age will be pre-render before called
+// fallback: true - if unknown if all data are dynamic
+// fallback: false - if all data are not dynamic
 export async function getStaticPaths() {
   const data = await getData();
 
