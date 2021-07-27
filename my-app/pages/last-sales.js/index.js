@@ -53,7 +53,7 @@ function LastSalesPage( props ) {
 
   return <div>
           <ul>
-          {sales.map(sale => <li key={sale.id}>{sale.username} - {sale.volume}€</li>)}
+          {sales.map(sale => <li key={sale.id}>{sale.username} - {sale.volumen}€</li>)}
         </ul>
         <p>Use func <strong>getServerSideProps</strong> for server side and  useSWR (HOOK) with useEffect (HOOK)</p>
         <p>Best practics: use Server Side Render with Client Side Fetch</p>
