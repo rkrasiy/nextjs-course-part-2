@@ -1,19 +1,51 @@
 import { useRouter } from "next/router";
 
-import { getFilteredEvents } from "../../dummy-data";
+import { getFilteredEvents } from "../../helpers/api-util"; 
 import EventList from "../../components/events/event-list";
 import LinkWrapper from "../../components/linkwrapper/linkwrapper";
 import ErrorAlert from "../../components/ui/error/error-alert";
 
-function FilteredEventsPage(){
-  const router = useRouter();
-  const filterData = router.query.slug;
+function FilteredEventsPage( props ){
+  // const router = useRouter();
+  // const filterData = router.query.slug;
 
-  if(!filterData){
-    return <p className="center">Loading...</p>
+  // if(!filterData){
+  //   return <p className="center">Loading...</p>
+  // }
+  const filteredEvents = props.events;
+  
+  const { year, month } = props.date;
+  if( props.hasError ) {
+      return <ErrorAlert>
+        <p>Invalid filter. Please adjust your values!</p>
+        <LinkWrapper href="/events">Go back</LinkWrapper>
+      </ErrorAlert>
+    }
+
+  if(!filteredEvents || filteredEvents.length === 0){
+    return <ErrorAlert>
+        <p>No events found for the chosen filter</p>
+        <LinkWrapper href="/events">Go back</LinkWrapper>
+      </ErrorAlert>
   }
 
-  console.log(filterData)
+  return (
+    <div>
+      <h1>Filtered Events</h1>
+      <p>Month: {month} and Year: {year}</p>
+      <LinkWrapper href="/events">All Events</LinkWrapper>
+      <EventList items={filteredEvents} />
+    </div>
+  )
+}
+
+export default FilteredEventsPage;
+
+export async function getServerSideProps( context ){
+  const { params } = context;
+
+  const filterData = params.slug;
+
   const filteredYear = filterData[0]
   const filteredMonth = filterData[1]
 
@@ -28,31 +60,27 @@ function FilteredEventsPage(){
     numMonth < 1 ||
     numMonth > 12
     ) {
-      return <ErrorAlert>
-        <p>Invalid filter. Please adjust your values!</p>
-        <LinkWrapper href="/events">Go back</LinkWrapper>
-      </ErrorAlert>
+      return {
+        props: {
+          hasError: true
+        },
+        // redirect: {
+        //   destination: './error'
+        // }
+      }
     }
-  
-  const filteredEvents =  getFilteredEvents({
-    year: numYear,
-    month: numMonth
-  });
-  
-  if(!filteredEvents || filteredEvents.length === 0){
-    return <ErrorAlert>
-        <p>No events found for the chosen filter</p>
-        <LinkWrapper href="/events">Go back</LinkWrapper>
-      </ErrorAlert>
+    const filteredEvents =  await getFilteredEvents({
+      year: numYear,
+      month: numMonth
+    });
+      
+  return {
+    props:{
+      events: filteredEvents,
+      date: {
+        year: numYear,
+        month: numMonth
+      }
+    }
   }
-
-  return (
-    <div>
-      <h1>Filtered Events</h1>
-      <LinkWrapper href="/events">All Events</LinkWrapper>
-      <EventList items={filteredEvents} />
-    </div>
-  )
 }
-
-export default FilteredEventsPage;

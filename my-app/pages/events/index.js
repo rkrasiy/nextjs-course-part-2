@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { useRouter } from "next/router";
-
+import Head from 'next/head';
 import { getFeaturedEvents } from "../../helpers/api-util";
 
 import EventList from "../../components/events/event-list";
@@ -19,6 +19,12 @@ function AllEventsPage ( props ){
     return <p>Error</p>
   return (
     <Fragment>
+      <Head>
+        <title>All Events</title>
+        <meta 
+          name="description" 
+          content="Find a lot of events"/>
+      </Head>
       <EventsSearch onSearch={ findEvensHadler } />
       <EventList items={events} />
     </Fragment>

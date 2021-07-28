@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import LinkWrapper from "../linkwrapper/linkwrapper"
 import classes from "./event-item.module.css"
 
@@ -17,7 +18,7 @@ function EventItem ( props ) {
   return <li className={classes.item}>
           <LinkWrapper href={exporeLink} className={classes.wrapper} >
             <div className={classes.image}>
-              <img src={image} alt={title} />
+              <Image src={image} alt={title} width={400} height={500}/>
             </div>
             <div className={classes.content}>
               <h2>{title}</h2>
