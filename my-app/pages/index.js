@@ -1,10 +1,10 @@
 import Head from 'next/head';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 function HomePage( props ) {
   const emailInputRef = useRef();
   const feedbackInputRef = useRef();
-
+  const [ feedbackItems, setFeedbackItems ] = useState([]);
 
   function submitFormHandler(event) {
     event.preventDefault();
@@ -13,7 +13,6 @@ function HomePage( props ) {
     const feedbackInput =  feedbackInputRef.current.value;
 
     const reqBody = { email: enteredEmail, text: feedbackInput }
-console.log("ReqBody: ", reqBody)
     fetch('/api/feedback', {
       method: 'POST',
       body: JSON.stringify(reqBody),
@@ -24,6 +23,22 @@ console.log("ReqBody: ", reqBody)
       .then( (response) => response.json())
       .then( (data) => console.log("Recived: ",data));
 
+  }
+
+
+  function loadFeedbackHadler() {
+    fetch('/api/feedback', )
+      .then( (response) => response.json())
+      .then( (data) => setFeedbackItems(data.feedback));
+  }
+
+  let fbItems = null
+
+  if(feedbackItems.length > 0){
+    fbItems = (<ul>{feedbackItems.map( item => <li key={item.id}>
+      <h3>{item.email}</h3>
+      <p>{item.text}</p>
+    </li>)}</ul>)
   }
 
   return (
@@ -46,6 +61,8 @@ console.log("ReqBody: ", reqBody)
         </div>
         <button>Send Feedback</button>
       </form>
+      <button onClick={loadFeedbackHadler}>Get FeedBack</button>
+      {fbItems}
     </div>
   );
 }
