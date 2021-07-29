@@ -25,7 +25,8 @@ export async function getFeaturedEvents() {
 
 export async function getEventById(id){
   const event = await getEvents(`?orderBy="id"&equalTo="${id}"`)
-  return event
+  //console.log("Event: ", event)
+  return event[0]
 }
 
 export async function getFilteredEvents(dataFilter) {
