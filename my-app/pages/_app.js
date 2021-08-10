@@ -4,6 +4,8 @@ import Layout from '../components/layout/layout'
 function MyApp({ Component, pageProps }) {
   const pages = [
     {href: "/", title: "Home"},
+    {href: "/part2", title: "Part2"},
+    {href: "/part2/events", title: "Part2 Events"},
     {href: "/feedback", title: "Feedback"},
     {href: "/last-sales", title: "SSR & React HOOKs"},
     {href: "/user-profile", title: "SSR"},
