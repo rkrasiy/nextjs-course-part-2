@@ -25,6 +25,7 @@ function handler( req, res ){
     //store that in a database or in a file
     const filePath = buildFeedbackPath();
     const data = extractFeedback( filePath )
+    console.log("Path: ", filePath)
     data.push(newFeedback)
     fs.writeFileSync(filePath, JSON.stringify(data))
     res.status(201).json({message: 'Success!', feedback: newFeedback})

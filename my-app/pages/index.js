@@ -13,6 +13,7 @@ function HomePage( props ) {
     const feedbackInput =  feedbackInputRef.current.value;
 
     const reqBody = { email: enteredEmail, text: feedbackInput }
+    //console.log("Entered message: ", reqBody)
     fetch('/api/feedback', {
       method: 'POST',
       body: JSON.stringify(reqBody),
@@ -21,13 +22,13 @@ function HomePage( props ) {
       }
     })
       .then( (response) => response.json())
-      .then( (data) => console.log("Recived: ",data));
+      .then( (data) => console.log("Recived: ", data));
 
   }
 
 
   function loadFeedbackHadler() {
-    fetch('/api/feedback', )
+    fetch('/api/feedback')
       .then( (response) => response.json())
       .then( (data) => setFeedbackItems(data.feedback));
   }
