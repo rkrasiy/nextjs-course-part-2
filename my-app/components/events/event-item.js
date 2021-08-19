@@ -14,7 +14,7 @@ function EventItem(props) {
     year: "numeric",
   });
 
-  console.log("Route", router);
+  //console.log("Route", router);
 
   const simpleAddress = location.replace(", ", "\n");
   const exporeLink = router.pathname + "/" + id;

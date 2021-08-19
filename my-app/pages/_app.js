@@ -1,7 +1,8 @@
 import "../styles/globals.css";
 import Layout from "../components/layout/layout";
+import { NotificationContextProvider } from "../store/notification-context"
 
-function MyApp({ Component, pageProps }) {
+export default function MyApp({ Component, pageProps }) {
   const pages = [
     { href: "/", title: "Home" },
     { href: "/feedback", title: "Feedback" },
@@ -14,10 +15,10 @@ function MyApp({ Component, pageProps }) {
     { href: "/contact", title: "Contact" },
   ];
   return (
-    <Layout pages={pages}>
-      <Component {...pageProps} />
-    </Layout>
+      <NotificationContextProvider>
+        <Layout pages={pages}>
+          <Component {...pageProps} />
+        </Layout>
+    </NotificationContextProvider>
   );
 }
-
-export default MyApp;

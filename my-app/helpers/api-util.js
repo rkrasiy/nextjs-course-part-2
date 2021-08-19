@@ -35,3 +35,22 @@ export async function getFilteredEvents(dataFilter) {
   const event =  await getEvents(`?orderBy="date"&startAt="${month}/1/${year}"&endAt="${month + 1}/1/${year}"`)
   return event;
 }
+
+export async function updateEvent(event){
+  let id = event.id
+  let data = event
+  var dataAPI = fetch(`https://nextjs-d63cf-default-rtdb.europe-west1.firebasedatabase.app/events/${id}.json`,
+    {method: "PATCH", body: event})
+  /*
+  .then(response => {
+    return response.json()
+  })
+  .then(data => {
+    // Work with JSON data here
+    return data;
+  }, error => {
+    console.error('onRejected function called: ' + error.message);
+  })
+   */   
+    return dataAPI
+}

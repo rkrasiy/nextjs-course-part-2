@@ -6,6 +6,7 @@ import { getFeaturedEvents } from "../../helpers/api-util";
 import EventList from "../../components/events/event-list";
 import EventsSearch from "../../components/events/events-search";
 import NewsletterRegistration from "../../components/input/newsletter-registration";
+
 function AllEventsPage(props) {
   const router = useRouter();
   const { events } = props;

@@ -1,10 +1,13 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import Header from "./header";
 import Footer from "./footer";
 import Head from 'next/head';
-
+import Notification from "../notification/notification"
+import NotificationContext from "../../store/notification-context";
 
 function Layout ( props ) {
+  const notificationCtx = useContext( NotificationContext );
+  const activeNotification = notificationCtx.notification;
   return <Fragment>
     <Head>
       <title>My Next Js Course</title>
@@ -14,6 +17,15 @@ function Layout ( props ) {
     <Header pages={props.pages}/>
     <main>{props.children}</main>
     <Footer />
+    {
+      activeNotification && (
+        <Notification
+          title={activeNotification.title}
+          message={activeNotification.message}
+          status={activeNotification.status}
+        />
+      )
+    }
   </Fragment>
 }
 
