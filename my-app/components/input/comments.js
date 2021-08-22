@@ -70,15 +70,21 @@ function Comments( props ) {
         })
       });
   }
-
+  console.log("Status", notificationCtx)
+let content = null
+if(showComments && comments.length && !notificationCtx.notification){
+  content = <CommentList items={comments}/>
+}else if(notificationCtx.notification){
+  content = <Spinner text="Waiting..." />
+}
   return (
     <section className={classes.comments}>
       <button onClick={toggleCommentsHandler}>
         {showComments ? 'Hide' : 'Show'} Comments
       </button>
       {showComments && <NewComment onAddComment={addCommentHandler} />}
-      {showComments && comments.length ? <CommentList items={comments}/> : null}
-      <Spinner text="Waiting..." />
+      {content}
+      
     </section>
   );
 }
