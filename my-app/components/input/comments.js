@@ -10,14 +10,16 @@ function Comments( props ) {
   const [showComments, setShowComments] = useState(false);
   const [ comments, setComments ] = useState([])
   const notificationCtx = useContext( NotificationContext )
-
+  const [ isFetchingComments, setIsFetchingComments] = useState(false)
   useEffect( () => {
     if(showComments){
+      setIsFetchingComments(true)
       fetch("/api/comments/" + eventId)
       .then( resp => resp.json())
         .then( data => {
           console.log("JSON", data)
           setComments(data.comments)
+          setIsFetchingComments(false)
         })
     }
   },[showComments])
@@ -31,8 +33,8 @@ function Comments( props ) {
   function addCommentHandler(commentData) {
 
     notificationCtx.showNotification({
-      title: "Pending!",
-      message: "Sending your comment",
+      title: "Sending comment...",
+      message: "Your comment is currently being stored into a database. ",
       status: "pending"
     })
 
@@ -71,19 +73,14 @@ function Comments( props ) {
       });
   }
   console.log("Status", notificationCtx)
-let content = null
-if(showComments && comments.length && !notificationCtx.notification){
-  content = <CommentList items={comments}/>
-}else if(notificationCtx.notification){
-  content = <Spinner text="Waiting..." />
-}
   return (
     <section className={classes.comments}>
       <button onClick={toggleCommentsHandler}>
         {showComments ? 'Hide' : 'Show'} Comments
       </button>
       {showComments && <NewComment onAddComment={addCommentHandler} />}
-      {content}
+      {showComments && !isFetchingComments && <CommentList items={comments}/>}
+      {showComments && isFetchingComments && <Spinner text="Waiting..." />}
       
     </section>
   );
