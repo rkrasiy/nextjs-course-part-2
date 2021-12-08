@@ -1,1 +1,1 @@
-Practic with React JS / Next JS
+Next JS and React course project
